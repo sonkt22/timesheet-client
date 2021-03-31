@@ -1,0 +1,62 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+
+package app;
+
+// Declare a service for each controller you have
+service TimesheetController {
+  // Declare an rpc for each method that is called via gRPC
+  rpc FindTimesheetById(FindOneInput) returns (FindOneResponce) {}
+  rpc FindALLTimesheet(FindAllInput) returns (FindAllResponce) {}
+  rpc CreateTimesheet(CreateTimesheetInput) returns (DataResponce) {}
+} 
+
+message CreateTimesheetInput {
+  string userId = 1;
+  string employeeId = 2;
+  string authorId = 3;
+  string serviceId = 4;
+  string invoiceId = 5;
+  string startTime = 6;
+  string endTime = 7;
+  string changeTime = 8;
+  string createdAt = 9;
+  string note = 10;
+  int32 status = 11;
+}
+
+message DataResponce {
+  int32 code = 1;
+  string message = 2;
+}
+
+message FindAllInput {}
+
+message FindAllResponce {}
+
+message Timesheet {
+  string timesheetId = 1;
+  string userId = 2;
+  string employeeId = 3;
+  string authorId = 4;
+  string serviceId = 5;
+  string invoiceId = 6;
+  string startTime = 7;
+  string endTime = 8;
+  string changeTime = 9;
+  string createdAt = 10;
+  string note = 11;
+  int32 status = 12;
+}
+// Declare the types used above
+message FindOneInput {
+  string timesheetId = 1;
+}
+
+message FindOneResponce {
+  int32 code = 1;
+  string message = 2;
+  Timesheet timesheet = 3;
+}
